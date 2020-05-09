@@ -1,3 +1,6 @@
+<%@taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -77,35 +80,31 @@
       <section class="comments">
         <h3>Comentarios</h3>
         <ul>
-          <li>
-            <div class="comment-group">
-              <span class="user">Maria</span>
-              <span class="comment">Achei a noticia legal</span>
-            </div>
-            <hr />
-          </li>
-          <li>
-            <div class="comment-group">
-              <span class="user">Maria</span>
-              <span class="comment">Achei a noticia legal</span>
-            </div>
-            <hr />
-          </li>
+            <c:forEach items="${comments}" var="comment">
+                <li>
+                    <div class="comment-group">
+                        <span class="user">${comment.username}</span>
+                        <span class="comment">${comment.comment}</span>
+                    </div>
+                  <hr />
+                </li>
+            </c:forEach>
         </ul>
       </section>
 
-      <form action="">
+      <form action="CreateComment.do" method="post">
         <h4>Adicionar comentario</h4>
 
         <div class="form-group">
           <label>Nome</label>
-          <input type="text" id="username" />
+          <input type="text" id="username" name="username" />
         </div>
 
         <div class="form-group">
           <label>Comentario</label>
-          <textarea id="user-comment" rows="3"></textarea>
+          <textarea id="user-comment" rows="3" name="comment"></textarea>
         </div>
+        <button type="submit">Enviar</button> 
       </form>
     </div>
   </body>
